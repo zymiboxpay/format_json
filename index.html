@@ -81,15 +81,14 @@
   <script>
 
     document.querySelector('.container > textarea').addEventListener('paste', function(event){
-      
-      if(event.clipboardData.types.contains('text/plain') > -1){
+      var arr = Array.prototype.slice.apply(event.clipboardData.types);
+      if(arr.includes('text/plain')){
         var rawString = event.clipboardData.getData('text/plain');
         if(rawString){
           var formatedJSON = this.value = JSONFormat(rawString);
           event.preventDefault();
 
           this.setSelectionRange(0, this.value.length);
-
           // event.clipboardData.setData('text/plain', formatedJSON);
         }
       }
