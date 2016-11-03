@@ -29,18 +29,21 @@
       var p = [],
         push = function( m ) { return '\\' + p.push( m ) + '\\'; },
         pop = function( m, i ) { return p[i-1] },
-        tabs = function( count ) { return new Array( count + 1 ).join( '\t' ); };
+        tabs = function( count ) { return new Array( count + 1 ).join( '    ' ); };
 
       window.JSONFormat = function( json ) {
         p = [];
         var out = "",
           indent = 0;
-        
+
+        //delete blank line
+        json = json.replace(/\n/g,'');
+
         // Extract backslashes and strings
         json = json
           .replace( /\\./g, push )
           .replace( /(".*?"|'.*?')/g, push )
-          .replace( /\s+/, '' );    
+          .replace( /\s+/g, '' );    
 
         // Indent and insert newlines
         for( var i = 0; i < json.length; i++ ) {
