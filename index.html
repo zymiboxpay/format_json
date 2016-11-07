@@ -37,7 +37,7 @@
           indent = 0;
 
         //delete blank line
-        json = json.replace(/\n/g,'');
+        json = json.replace(/\n|\r/g,'');
 
         // Extract backslashes and strings
         json = json
